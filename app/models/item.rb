@@ -1,4 +1,7 @@
 class Item < ActiveRecord::Base
+  include PublicActivity::Common
+
+
   belongs_to :client
   belongs_to :outfit
 

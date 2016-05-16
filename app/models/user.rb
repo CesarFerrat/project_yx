@@ -4,12 +4,17 @@ class User < ActiveRecord::Base
         :recoverable, :rememberable, :trackable, :validatable
   attr_accessor :login
 
+  validates_uniqueness_of :email, :username
+
   has_many :clients
 
   has_attached_file :avatar, styles: { full: '500x500#', medium: '300x300#', thumb: '100x100#' }, default_url: '/images/:style/missing.png'
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   validates_attachment_size :avatar, less_than: 15.megabytes
+
+
+  
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup

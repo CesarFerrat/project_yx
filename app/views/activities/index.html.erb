@@ -1,0 +1,12 @@
+<h1>Activities in all your network of clients</h1>
+<% @activities.each do |activity| %>
+  <div class="activity">
+    <% if activity.owner == current_user %>
+      You
+    <% else %>
+    <%= link_to activity.owner.first_name, activity.owner if activity.owner %>
+    <% end %>
+    <%= render_activity activity %>
+    <small><%= activity.created_at.strftime('%H:%M:%S %-d %B %Y') %></small>
+  </div>
+<% end %>

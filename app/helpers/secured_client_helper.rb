@@ -1,0 +1,2 @@
+module SecuredClientHelper
+end

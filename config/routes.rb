@@ -1,11 +1,27 @@
 Rails.application.routes.draw do
+  root 'dashboard#index'
+
+  get "/activities/clients" => "activities#index"
+  get "/activities/clients/:client_id" => "activities#show"
+
+  get "/clients/:client_id/items" => "clients#all_items"
+  get "/clients/:client_id/items/:id" => "clients#item"
+  put "/clients/:client_id/items/:id" => "clients#update_item"
+
+  # get "/clients" => "clients#show" test to check if http request  from client works
+  get "/clients/:client_id/outfits" => "clientss#all_outfits"
+  get "/clients/:client_id/outfits/:id" => "clients#outfit"
+  put "/clients/:client_id/outfits/:id" => "clients#update_outfit"
+
+
+  resources :items
+  resources :outfits
+
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  root 'dashboard#index'
-  # get "dashboard/change_client", as: "change_client"
-  resources :clients
 
+  devise_for :clients, controllers: {sessions: 'sessions', registrations: 'registrations'}, skip: [:passwords]
 
   devise_for :users, controllers: {registrations: "users/registrations", sessions: "users/sessions", passwords: "users/passwords"}, skip: [:sessions, :registrations]
 

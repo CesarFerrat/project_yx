@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-  before_action :layer_platform, only: [:create]
 
   def update
     return unless user_is_editing_self
