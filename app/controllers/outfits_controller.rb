@@ -21,7 +21,7 @@ class OutfitsController < ApplicationController
         @item2.outfit_id = @outfit.id
         @item3.outfit_id = @outfit.id
         @item4.outfit_id = @outfit.id
-        redirect_to @outfits, notice: "Outfit was created."
+        redirect_to outfits_path, notice: "Outfit was created."
     else
       render :new
     end
@@ -36,15 +36,15 @@ class OutfitsController < ApplicationController
     @outfit = Outfit.find(params[:id])
     if @outfit.update_attributes(outfit_params)
       @outfit.create_activity :update, owner: current_user
-      redirect_to @outfits, notice: "Outfit details were updated."
+      redirect_to outfits_path, notice: "Outfit details were updated."
     end
   end
 
   def destroy
     @outfit = Outfit.find(params[:id])
-    @outfit.destroy
     @outfit.create_activity :destroy, owner: current_user
-    redirect_to @outfits, notice: "Outfit was destroyed."
+    @outfit.destroy
+    redirect_to outfits_path, notice: "Outfit was destroyed."
   end
 
   private

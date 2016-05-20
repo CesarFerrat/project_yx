@@ -1,1 +1,127 @@
-<h1>All clothes for <%= @client.first_name%> <%= @client.last_name %></h1>
+<script>
+function changeCategory(){
+  window.location = '/items?search=' + $('#category option:selected').val();
+  };
+</script>
+
+<div class="container">
+    <div class="row">
+    <div class="alert alert-info" style="min-height:80px;">
+        <div class="col-xs-5"></div>
+        <div class="col-xs-2" style="text-align: center; vertical-align: middle">
+            Show: <select class="form-control" id="category" onchange="changeCategory()">
+                    <option value ="" <%='selected' if @selected_category == '' || @selected_category.nil?%>>All clothes</option>
+                    <option value="jacket" <%='selected' if @selected_category == 'jacket'%>>Jackets</option>
+                    <option value="pant" <%='selected' if @selected_category == 'pant'%>>Pants</option>
+                    <option value="shoes" <%='selected' if @selected_category == 'shoes'%>>Shoes</option>
+                    <option value="shirt" <%='selected' if @selected_category == 'shirt'%>>Shirts</option>
+                    <option value="tshirt" <%='selected' if @selected_category == 'tshirt'%>>T-Shirts</option>
+                  </select>
+        </div>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-2">
+            <a class="btn btn-primary pull-right btn-lg launch-modal" href="#" data-modal-id="modal-register">Add an item</a>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="gallery">
+        <div id="items"><%= render 'items' %></div>
+      </div>
+    </div>
+</div>
+
+
+    <!-- MODAL -->
+    <div class="modal fade" id="modal-register" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+      <div class="modal-big">
+        <div class="modal-content">
+          <form role="form" action="/items" method="post" class="registration-form" enctype="multipart/form-data">
+            <div class="modal-header">
+              <button type="button" class="close pull-left" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+              </button>
+              <h3 class="modal-title" id="modal-register-label" style="text-align: center">Add new garment</h3>
+              <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+
+            <div class="modal-body row">
+                <div class="col-md-6">
+                        <div class="form-group">
+                          <img id="photo" alt="your image" width="220" height="220" />
+                          <input type="file" name="picture" value="" accept="image/*"
+                            onchange="document.getElementById('photo').src = window.URL.createObjectURL(this.files[0])">
+                        </div>
+                        <div class="form-group">
+                          <label class="" for="form-status">Status</label>
+                          <input type="text" name="status" value="" placeholder="Where is this item?" class="form-name form-control" id="form-status">
+                        </div>
+                        <div class="form-group">
+                          <label class="" for="form-status">Category</label>
+                          <input type="text" name="category" value="" placeholder="Give some tags to describe it!" class="form-name form-control" id="form-tags">
+                        </div>
+                </div>
+                <div class="col-md-6">
+                        <div class="form-group">
+                        <label class="" for="form-name">Name</label>
+                          <input type="text" name="name" value="" placeholder="IE Red Leather jacket" class="form-name form-control" id="form-name">
+                        </div>
+                        <div class="form-group">
+                          <label class="" for="form-description">Description</label>
+                          <input type="text" name="description" value="" placeholder="Describe scenarios to wear it" class="form-description form-control" id="form-description">
+                        </div>
+                        <div class="form-group">
+                          <label class="" for="form-notes">Notes</label>
+                          <textarea name="notes" value="" placeholder="(Private)"
+                                class="form-notes form-control" id="form-notes"></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label class="" for="form-id">ID #</label>
+                          <input type="text" name="id_number" value="" placeholder="UPC-A Format" class="form-id form-control" id="form-id">
+                        </div>
+                        <div class="form-group">
+                          <label class="" for="form-price">Price</label>
+                          <input type="text" name="price" value="" placeholder="Enter a dollar value" class="form-price form-control" id="form-price">
+                        </div>
+                        <div class="form-group">
+                          <label class="" for="form-new">Mark as "New"</label>
+                          <input type="checkbox" name="new" value="" class="form-new form-control" value="true" id="form-new">
+                        </div>
+                </div>
+            </div>
+        </form>
+        </div>
+      </div>
+    </div>
+    <script>
+
+    jQuery(document).ready(function() {
+        /*
+    	    Modals
+    	*/
+    	$('.launch-modal').on('click', function(e){
+    		e.preventDefault();
+    		$( '#' + $(this).data('modal-id') ).modal();
+    	});
+
+      $('input[type="text"], input[type="password"], textarea').each(function() {
+    		$(this).val( $(this).attr('placeholder') );
+        });
+        /*
+            Form validation
+        */
+        $('.registration-form').on('submit', function(e) {
+
+        	$(this).find('input[type="text"], textarea').each(function(){
+        		if( $(this).val() == "" ) {
+        			e.preventDefault();
+        			$(this).addClass('input-error');
+        		}
+        		else {
+        			$(this).removeClass('input-error');
+        		}
+        	});
+
+        });
+    });
+    </script>

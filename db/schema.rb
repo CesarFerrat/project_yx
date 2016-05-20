@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160514221343) do
+ActiveRecord::Schema.define(version: 20160519051113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,9 +117,15 @@ ActiveRecord::Schema.define(version: 20160514221343) do
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
+    t.string   "name"
+    t.text     "notes"
+    t.string   "id_number"
+    t.boolean  "new",                  default: false
+    t.datetime "deleted_at"
   end
 
   add_index "items", ["client_id"], name: "index_items_on_client_id", using: :btree
+  add_index "items", ["deleted_at"], name: "index_items_on_deleted_at", using: :btree
   add_index "items", ["outfit_id"], name: "index_items_on_outfit_id", using: :btree
 
   create_table "outfits", force: true do |t|

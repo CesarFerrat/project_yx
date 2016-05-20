@@ -1,3 +1,4 @@
-requested repair for: "<%= link_to activity.trackable.description, activity.trackable %>"
-requested cleaning for: "<%= link_to activity.trackable.description, activity.trackable %>"
-requested selling: "<%= link_to activity.trackable.description, activity.trackable %>"
+<%= activity.owner.first_name%> <%= activity.owner.last_name%> requested repair for: <strong><%= activity.trackable.name %></strong>
+<%= activity.owner.first_name%> <%= activity.owner.last_name%> requested cleaning for: <strong><%= activity.trackable.name %></strong>
+<%= activity.owner.first_name%> <%= activity.owner.last_name%> requested selling: <strong><%= activity.trackable.name%></strong>
+<%= activity.owner.first_name%> <%= activity.owner.last_name%> liked item: <strong><%= activity.trackable.name%></strong>

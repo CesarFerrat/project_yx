@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include PublicActivity::StoreController
 
-  protect_from_forgery with: :null_session
+  # protect_from_forgery with: :null_session
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
