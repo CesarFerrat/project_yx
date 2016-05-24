@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get "/clients/:client_id/outfits/:id" => "clients#outfit"
   put "/clients/:client_id/outfits/:id" => "clients#update_outfit"
 
+  post "/outfits/:id/duplicate" => "outfits#duplicate"
+
 
   resources :items
   resources :outfits

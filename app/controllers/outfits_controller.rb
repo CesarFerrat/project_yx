@@ -63,6 +63,20 @@ class OutfitsController < ApplicationController
     end
   end
 
+  def duplicate
+    @client = Client.find(session[:current_client_id])
+    @outfit = Outfit.find(params[:id])
+    @duplicate = @outfit.dup
+    @duplicate.outfit_picture = @outfit.outfit_picture 
+    @duplicate.client_id = session[:current_client_id]
+    if @duplicate.save
+        @duplicate.create_activity :create, owner: @client
+        redirect_to outfits_path, notice: "Outfit was duplicated."
+    end
+
+  end
+
+
   def destroy
     @client = Client.find(session[:current_client_id])
     @outfit = Outfit.find(params[:id])

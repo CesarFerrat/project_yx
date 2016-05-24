@@ -6,8 +6,8 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-edit pull-right" style="color:blue"></span></a>
         <ul class="dropdown-menu">
           <li><%= link_to 'Edit', controller: "outfits", action: "edit", id: outfit.id %></li>
-          <li><%= link_to 'Duplicate',url_for(action: :create,id: outfit.id),method: :create, data: {confirm: "Are you sure?"}%></li>
-          <li><%= link_to 'Delete',url_for(action: :destroy,id: outfit.id),method: :delete, data: {confirm: "Are you sure?"} %></li>
+          <li><%= link_to 'Duplicate',url_for(action: :duplicate,id: outfit.id),method: :duplicate, data: {confirm: "Are you sure about duplicating this outfit?"}%></li>
+          <li><%= link_to 'Delete',url_for(action: :destroy,id: outfit.id),method: :delete, data: {confirm: "Are you sure about removing this outfit?"} %></li>
         </ul>
     </li>
   </div>
