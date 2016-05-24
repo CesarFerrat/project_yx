@@ -60,8 +60,8 @@
         $( document ).ready(function() {
           var canvas = new fabric.Canvas('c');
           console.log("new canvas");
-          canvas.setHeight(530);
-          canvas.setWidth(560);
+          canvas.setHeight(600);
+          canvas.setWidth(720);
           canvas.backgroundColor="white";
           window.canvas = canvas;
           canvas.renderAll();
@@ -85,8 +85,8 @@
 
             var imgElement = document.getElementById(name);
             var imgInstance = new fabric.Image(imgElement, {
-                left: 250,
-                top: 250,
+                left: 100,
+                top: 100,
                 angle: -4,
                 scaleX: 4,
                 scaleY: 4,
