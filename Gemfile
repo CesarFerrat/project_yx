@@ -23,8 +23,6 @@ gem 'simple_token_authentication', '~> 1.0'
 # Activity feed for every changes in database
 gem 'public_activity'
 
-# js library for outfit creator
-gem "fabric-rails"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

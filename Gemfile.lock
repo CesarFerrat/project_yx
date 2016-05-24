@@ -96,7 +96,6 @@ GEM
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.6.0)
-    fabric-rails (1.2.1)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     formtastic (3.1.4)
@@ -263,7 +262,6 @@ DEPENDENCIES
   bundler
   coffee-rails (~> 4.0.0)
   devise!
-  fabric-rails
   jbuilder (~> 2.0)
   jquery-rails
   omniauth

@@ -64,6 +64,7 @@
           canvas.setWidth(560);
           var photo = $('#json').val();
           canvas.loadFromJSON(photo);
+          canvas.renderAll();
           console.log(photo);
           window.canvas = canvas;
         });
@@ -102,7 +103,7 @@
       </script>
 
       <div class="col-md-3 form">
-        <form id="form" role="form" action="/outfits/<%= @outfit.id %>" method="patch" class="registration-form" enctype="multipart/form-data">
+        <form id="form" role="form" action="/outfits/<%= @outfit.id %>" method="post" class="registration-form" enctype="multipart/form-data">
           <div class="form-group">
           <label class="" for="form-name">Name</label>
             <input type="text" name="name" value="" placeholder="IE Red Leather jacket" class="form-name form-control" id="form-name">
@@ -132,6 +133,7 @@
             <label class="" for="form-id">ID #</label>
             <input type="text" name="id_number" value="" placeholder="UPC-A Format" class="form-id form-control" id="form-id">
           </div>
+          <input name="_method" type="hidden" value="patch" />
           <input id="outfit_picture" type="hidden" class=" final-outfit hidden" name="outfit_picture" value="">
           <input id="canvas_picture" type="hidden" class=" final-outfit hidden" name="canvas" value="">
           <input type="submit hidden" value="Submit" class="hidden">
@@ -148,13 +150,8 @@
     var canvas_picture = JSON.stringify(canvas);
     $("#canvas_picture").val(canvas_picture);
 
-    // var img = new Image();
-    // img.setAttribute('crossOrigin', 'anonymous');
-    // img.src = canvas.toDataURL('png');
-    //
-
     var outfit_picture = canvas.toDataURL('png')
-    $("#outfit_picture").val(img);
+    $("#outfit_picture").val(outfit_picture);
 
     console.log(canvas_picture);
     $("#form").submit();
