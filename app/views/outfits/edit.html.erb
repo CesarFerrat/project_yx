@@ -63,7 +63,7 @@
           canvas.setHeight(530);
           canvas.setWidth(560);
           var photo = $('#json').val();
-          canvas.loadFromJSON(photo);
+          canvas.loadFromJSON(photo, canvas.renderAll.bind(canvas));
           console.log(photo);
           window.canvas = canvas;
         });
