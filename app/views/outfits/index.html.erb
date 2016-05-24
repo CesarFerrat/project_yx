@@ -1,1 +1,35 @@
-<h1>All outfits created by <%= current_user.username %> for <%= @client.first_name%> <%= @client.last_name %></h1>
+<div class="container">
+    <div class="row">
+    <div class="alert alert-info" style="min-height:80px;">
+        <div class="col-xs-5"></div>
+        <div class="col-xs-2" style="text-align: center; vertical-align: middle">
+            Show: <select class="form-control" id="category" onchange="changeCategory(this.value)">
+                    <option value ="" <%='selected' if @selected_outfit == '' || @selected_outfit.nil?%>>All outfits</option>
+                    <option value="casual" <%='selected' if @selected_outfit == 'casual'%>>Casual</option>
+                    <option value="business" <%='selected' if @selected_outfit == 'business'%>>Business</option>
+                    <option value="business-casual" <%='selected' if @selected_outfit == 'business-casual'%>>Business-casual</option>
+                    <option value="date-night" <%='selected' if @selected_outfit == 'date-night'%>>Date night</option>
+                    <option value="ceremony" <%='selected' if @selected_outfit == 'ceremony'%>>Ceremony</option>
+                    <option value="sport" <%='selected' if @selected_outfit == 'sport'%>>Sport</option>
+                  </select>
+        </div>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-2">
+            <a class="btn btn-primary pull-right btn-lg" href="/outfits/new" data-modal-id="modal-register">Create a new outfit</a>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="gallery">
+        <div id="outfits">
+          <%= render 'outfits' %>
+        </div>
+      </div>
+    </div>
+</div>
+<script>
+function changeCategory(){
+  console.log($('#category option:selected').val());
+  window.location = '/outfits?search=' + $('#category option:selected').val();
+  };
+</script>

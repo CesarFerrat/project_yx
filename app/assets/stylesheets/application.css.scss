@@ -24,7 +24,7 @@
 
 body {
   background-color: #f6f3f3;
-
+  margin-top: 60px;
 }
 
 .glyphicon {
@@ -35,6 +35,7 @@ body {
   font-weight: 400;
   font-size: 20px;
  }
+
 
 .navbar .navbar-nav {
   display: inline-block;
@@ -80,11 +81,99 @@ body {
   text-align: center;
 }
 
-/***** Gallery *****/
+
+/***** New outfit *****/
+
+.display{
+  display: flex;
+    overflow: hidden;
+    height: 80vh;
+    margin-top: -50px;
+    padding-top: 5px;
+    // position: relative;
+    width: 100%;
+    backface-visibility: hidden;
+    will-change: overflow;
+
+}
+
+
+.title h1 {
+  text-align: center;
+
+}
+
+.outfit-creator{
+
+  padding-left: 60px;
+
+}
+
+canvas {
+  width: 94%;
+  border-style: dashed;
+  border-width: 3px;
+
+}
+
+.form {
+  padding-left: 50px;
+}
+
+.gallery-for-outfit-creator {
+  margin-left: 0px;
+  width: 100%;
+  background-color: white;
+  // overflow: auto;
+  // height: auto;
+  // margin: auto;
+
+  // overflow: scroll;
+}
+
+.scrolling {
+  background-color: white;
+
+  overflow: auto;
+  height: auto;
+  padding-left: 0px;
+  padding-right: 0px;
+
+
+}
+
+.galleryItem-for-outfit-creator {
+ color: #797478;
+ font: 10px/1.5 Verdana, Helvetica, sans-serif;
+ float: left;
+ margin:  2% 2% 15px 2%;
+}
+
+.galleryItem-for-outfit-creator img {
+  width: 110px;
+  height: 120px;
+ // max-width: 100%;
+ // max-height: 80%;
+ -webkit-border-radius: 5px;
+ -moz-border-radius: 5px;
+ border-radius: 5px;
+}
+
+.row .creator-options {
+  padding-top: 40px;
+
+}
+
+.creator-options span.glyphicon {
+    font-size: 1.5em;
+}
+
+/***** Gallery Item *****/
 
 .gallery {
  width: 80%;
  margin: auto;
+ padding-bottom: 60px;
  overflow: hidden;
  background-color: white;
 }
@@ -136,6 +225,30 @@ only screen and (max-device-width : 320px){
 }
 
 
+
+/***** Gallery Outfit *****/
+
+
+.galleryOutfit {
+ color: #797478;
+ font: 10px/1.5 Verdana, Helvetica, sans-serif;
+ float: left;
+ width: 16%;
+ margin:  2% 2% 15px 2%;
+}
+
+
+.galleryOutfit img {
+  width: 150px;
+  height: 160px;
+ // max-width: 100%;
+ // max-height: 80%;
+ -webkit-border-radius: 5px;
+ -moz-border-radius: 5px;
+ border-radius: 5px;
+}
+
+
 /***** Modal *****/
 
 .modal-content {
@@ -169,8 +282,10 @@ only screen and (max-device-width : 320px){
 	padding: 25px 25px 30px 25px;
 	background: #eee;
 	text-align: left;
+  height: 100%;
 	-moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
 }
+
 
 .modal-body img {
 	margin-bottom: 15px;
@@ -219,9 +334,9 @@ textarea.form-control:focus {
     -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
 }
 
-// input[type="text"]:-moz-placeholder, textarea:-moz-placeholder, textarea.form-control:-moz-placeholder { color: #888; }
-// input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #888; }
-// input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #888; }
+input[type="text"]:-moz-placeholder, textarea:-moz-placeholder, textarea.form-control:-moz-placeholder { color: #888; }
+input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #888; }
+input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #888; }
 
 
 

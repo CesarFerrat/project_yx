@@ -1,0 +1,163 @@
+<div class="container-fluid">
+    <div class="row">
+    <div class="alert alert-info" style="min-height:80px;">
+        <div class="col-xs-2" style="text-align: center; vertical-align: middle">
+            Show: <select class="form-control" id="category" onchange="changeCategory()">
+                    <option value ="" <%='selected' if @selected_category == '' || @selected_category.nil?%>>All clothes</option>
+                    <option value="jacket" <%='selected' if @selected_category == 'jacket'%>>Jackets</option>
+                    <option value="pant" <%='selected' if @selected_category == 'pant'%>>Pants</option>
+                    <option value="shoes" <%='selected' if @selected_category == 'shoes'%>>Shoes</option>
+                    <option value="shirt" <%='selected' if @selected_category == 'shirt'%>>Shirts</option>
+                    <option value="tshirt" <%='selected' if @selected_category == 'tshirt'%>>T-Shirts</option>
+                  </select>
+        </div>
+        <div class="col-xs-8 title">
+          <h1><strong>Edit the outfit</strong></h1>
+        </div>
+        <div class="col-xs-2">
+            <a class="btn btn-danger btn-lg" href="/outfits" >Cancel</a>
+            <a class="btn btn-primary pull-right btn-lg" href="javascript:save_outfit();" >Save</a>
+        </div>
+    </div>
+    </div>
+    <div class="row display">
+      <div class="col-md-4 scrolling">
+        <div class="gallery-for-outfit-creator">
+          <%= render 'outfits_creator_gallery' %>
+        </div>
+      </div>
+      <script>
+      function changeCategory(){
+        $.ajax({
+        type: "GET",
+        url: '/items?skip_layout=true&search=' + $('#category option:selected').val(),
+        success: function(data){
+              $('#items').html(data)
+        }
+        });
+      };
+
+      </script>
+
+
+      <div class="col-md-5 outfit-creator">
+        <input type="hidden" id="json" value="<%= @canvas %>">
+        <canvas class="canvas" id="d">
+
+        </canvas>
+        <div class="row creator-options">
+          <div class="col-md-3"></div>
+            <div class="col-md-5">
+              <a id="back" href="javascript:add_item(back);" ><span class="glyphicon glyphicon-fast-backward"  style="color:black" ><strong>BACK</strong></span></a>
+              <a id="reset" href="javascript:add_item(reset);"><span class="glyphicon glyphicon-trash pull-right" style="color:red"><strong>RESET</strong></span></a>
+              <div class="col-md-4"></div></div>
+          <div class="col-md-4"></div>
+        </div>
+      </div>
+
+      <script>
+
+        $( document ).ready(function() {
+          var canvas = new fabric.Canvas('d');
+          console.log("new canvas");
+          canvas.setHeight(530);
+          canvas.setWidth(560);
+          var photo = $('#json').val();
+          canvas.loadFromJSON(photo);
+          console.log(photo);
+          window.canvas = canvas;
+        });
+
+        function add_item(name) {
+            console.log("hello");
+            // console.log(name);
+            if  (name == back) {
+              console.log("back");
+              var items = canvas.getObjects();
+              var last_item = items[items.length-1];
+              canvas.remove(last_item);
+              return;
+            };
+            if  (name == reset) {
+              console.log("reset");
+              canvas.clear();
+              return;
+            };
+
+            var imgElement = document.getElementById(name);
+            var imgInstance = new fabric.Image(imgElement, {
+                left: 250,
+                top: 250,
+                angle: -4,
+                scaleX: 4,
+                scaleY: 4,
+
+            });
+            canvas.add(imgInstance);
+            console.log("new image");
+            canvas.renderAll();
+        };
+
+
+      </script>
+
+      <div class="col-md-3 form">
+        <form id="form" role="form" action="/outfits/<%= @outfit.id %>" method="patch" class="registration-form" enctype="multipart/form-data">
+          <div class="form-group">
+          <label class="" for="form-name">Name</label>
+            <input type="text" name="name" value="" placeholder="IE Red Leather jacket" class="form-name form-control" id="form-name">
+          </div>
+          <div class="form-group">
+            <label class="" for="form-description">Description</label>
+            <input type="text" name="description" value="" placeholder="Describe scenarios to wear it" class="form-description form-control" id="form-description">
+          </div>
+          <div class="form-group">
+            <label class="" for="form-status">Status</label>
+            <input type="text" name="status" value="" placeholder="Available for purchase?" class="form-name form-control" id="form-status">
+          </div>
+          <div class="form-group">
+            <label class="" for="form-status">Category</label>
+            <input type="text" name="category" value="" placeholder="Give some tags to describe it!" class="form-name form-control" id="form-tags">
+          </div>
+          <div class="form-group">
+            <label class="" for="form-notes">Notes</label>
+            <textarea name="notes" value="" placeholder="(Private)"
+                  class="form-notes form-control" id="form-notes"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="" for="form-price">Price</label>
+            <input type="text" name="price" value="" placeholder="Enter a dollar value" class="form-price form-control" id="form-price">
+          </div>
+          <div class="form-group">
+            <label class="" for="form-id">ID #</label>
+            <input type="text" name="id_number" value="" placeholder="UPC-A Format" class="form-id form-control" id="form-id">
+          </div>
+          <input id="outfit_picture" type="hidden" class=" final-outfit hidden" name="outfit_picture" value="">
+          <input id="canvas_picture" type="hidden" class=" final-outfit hidden" name="canvas" value="">
+          <input type="submit hidden" value="Submit" class="hidden">
+        </form>
+      </div>
+    </div>
+</div>
+
+<script>
+  function save_outfit() {
+    console.log("serializing")
+    canvas.deactivateAll().renderAll();
+
+    var canvas_picture = JSON.stringify(canvas);
+    $("#canvas_picture").val(canvas_picture);
+
+    // var img = new Image();
+    // img.setAttribute('crossOrigin', 'anonymous');
+    // img.src = canvas.toDataURL('png');
+    //
+
+    var outfit_picture = canvas.toDataURL('png')
+    $("#outfit_picture").val(img);
+
+    console.log(canvas_picture);
+    $("#form").submit();
+
+  };
+</script>

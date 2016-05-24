@@ -1,0 +1,8 @@
+<div id="items">
+  <% @items.each do |item| %>
+    <div class="galleryItem-for-outfit-creator">
+      <%= image_tag item.picture.url(:medium), :id => item.name, :crossorigin => 'anonymous'%>
+        <a id="download" href="javascript:add_item('<%= item.name %>');" name="<%= item.name %>"><span class="glyphicon glyphicon-plus-sign pull-right" style="color:blue"></span></a>
+    </div>
+  <% end %>
+</div>

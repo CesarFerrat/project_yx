@@ -1,8 +1,3 @@
-<script>
-function changeCategory(){
-  window.location = '/items?search=' + $('#category option:selected').val();
-  };
-</script>
 
 <div class="container">
     <div class="row">
@@ -24,6 +19,12 @@ function changeCategory(){
         </div>
     </div>
     </div>
+    <script>
+    function changeCategory(){
+      window.location = '/items?search=' + $('#category option:selected').val();
+      };
+    </script>
+
     <div class="row">
       <div class="gallery">
         <div id="items"><%= render 'items' %></div>

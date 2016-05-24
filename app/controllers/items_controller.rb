@@ -5,6 +5,8 @@ class ItemsController < ApplicationController
     @items = @client.items.without_deleted.search(params[:search])
     @selected_category = params[:search]
 
+    render :items, :layout => false if params[:skip_layout]
+
   end
 
   def new
