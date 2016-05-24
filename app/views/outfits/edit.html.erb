@@ -63,8 +63,9 @@
           canvas.setHeight(530);
           canvas.setWidth(560);
           var photo = $('#json').val();
-          canvas.loadFromJSON(photo);
-          canvas.renderAll();
+
+          canvas.loadFromJSON(photo, canvas.renderAll.bind(canvas));
+
           console.log(photo);
           window.canvas = canvas;
         });
@@ -136,6 +137,7 @@
           <input name="_method" type="hidden" value="patch" />
           <input id="outfit_picture" type="hidden" class=" final-outfit hidden" name="outfit_picture" value="">
           <input id="canvas_picture" type="hidden" class=" final-outfit hidden" name="canvas" value="">
+          <input name="_method" type="hidden" value="patch" />
           <input type="submit hidden" value="Submit" class="hidden">
         </form>
       </div>
