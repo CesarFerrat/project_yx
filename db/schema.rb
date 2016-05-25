@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160523081113) do
+ActiveRecord::Schema.define(version: 20160525050823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,10 @@ ActiveRecord::Schema.define(version: 20160523081113) do
     t.string   "id_number"
     t.boolean  "new",                  default: false
     t.datetime "deleted_at"
+    t.boolean  "like",                 default: false
+    t.boolean  "sell",                 default: false
+    t.boolean  "clean",                default: false
+    t.boolean  "repair",               default: false
   end
 
   add_index "items", ["client_id"], name: "index_items_on_client_id", using: :btree
@@ -145,6 +149,8 @@ ActiveRecord::Schema.define(version: 20160523081113) do
     t.integer  "outfit_picture_file_size"
     t.datetime "outfit_picture_updated_at"
     t.json     "canvas"
+    t.boolean  "like",                        default: false
+    t.boolean  "purchase",                    default: false
   end
 
   add_index "outfits", ["client_id"], name: "index_outfits_on_client_id", using: :btree

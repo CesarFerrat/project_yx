@@ -23,6 +23,7 @@ class ClientsController < SecuredClientController
         @item.create_activity :update, owner: current_client
         format.json { render json: @item, status: :updated }
       end
+    end
   end
 
 
@@ -44,6 +45,7 @@ class ClientsController < SecuredClientController
         @outfit.create_activity :update, owner: current_client
         format.json { render json: @outfit, status: :updated }
       end
+    end
   end
 
 

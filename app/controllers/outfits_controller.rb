@@ -15,6 +15,7 @@ class OutfitsController < ApplicationController
   api :GET, '/clients/:client_id/outfits', 'Lists all outfits for a client'
   formats ['json']
   param_group :auth_and_client
+  param :search, String, desc: 'A category of outfit to filter by', required: true
   example <<-EOT
   Response:
   {
@@ -34,6 +35,28 @@ class OutfitsController < ApplicationController
     @selected_category = params[:search]
   end
 
+
+  api :GET, '/clients/:client_id/outfits/:outfit_id', 'Show a specific outfit'
+  formats ['json']
+  param_group :auth_and_client_and_outfit
+  example <<-EOT
+  Response:
+  {
+      "id": "61acf683-c23d-4f4b-ac5d-bb5cdc51e6be",
+      "client_id": "c756f7dc-632e-4ab5-904d-33f9f0a25b94",
+      "name": "blue dinner jacket",
+      "description": "jacket to go on a date",
+      "status": "at client's home"
+      "category": "business date ceremony",
+      "notes": "This kind of jacket needs to be dry-cleaned once before every season",
+      "id_number": "UPC-A11445599",
+      "price": 99,
+      "new": "false",
+      "created_at": "2015-12-17T00:29:41.756Z",
+      "updated_at": "2015-12-17T00:29:41.756Z",
+      "picture": "https/s3.amazonaws.com/picture_35"
+  }
+  EOT
   def show
     @outfit = Outfit.without_deleted.find(params[:id])
   end
@@ -61,9 +84,6 @@ class OutfitsController < ApplicationController
     end
   end
 
-  def show
-    @outfit = Outfit.find(params[:id])
-  end
 
   def edit
     @outfit = Outfit.find(params[:id])
@@ -74,7 +94,13 @@ class OutfitsController < ApplicationController
 
   end
 
-
+  api :PUT, '/clients/:client_id/outfits/:outfit_id', 'Update an outfit'
+  formats ['json']
+  param_group :auth_and_client_and_outfit
+  param :outfit, Hash do
+    param :like, :bool, desc: 'like outfit'
+    param :purchase, :bool, desc: 'Purchase outfit'
+  end
   def update
     @client = Client.find(session[:current_client_id])
     @outfit = Outfit.find(params[:id])
@@ -110,7 +136,7 @@ class OutfitsController < ApplicationController
   private
 
   def outfit_params
-    params.permit(:name, :description, :status, :category, :notes, :price, :new, :id_number, :outfit_picture, :canvas)
+    params.permit(:name, :description, :status, :category, :notes, :price, :new, :id_number, :outfit_picture, :canvas, :like, :purchase)
   end
 
 end
