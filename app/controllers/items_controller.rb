@@ -1,5 +1,27 @@
 class ItemsController < ApplicationController
 
+  def_param_group :auth_and_client_and_item do
+    param :auth_token, String, desc: 'Client is logged in with auth token', required: true
+    param :client_id, String, desc: 'The client who owns the item', required: true
+    param :item_id, String, desc: 'The item being referenced', required: true
+  end
+
+  def_param_group :auth_and_client do
+    param :auth_token, String, desc: 'Client is logged in with auth token', required: true
+    param :client_id, String, desc: 'The client who owns the item', required: true
+  end
+
+
+
+  api :GET, '/clients/:client_id/items', 'Lists all items for a client'
+  formats ['json']
+  param_group :auth_and_client
+  example <<-EOT
+  Response:
+  {
+    
+  }
+  EOT
   def index
     @client = Client.find(session[:current_client_id])
     @items = @client.items.without_deleted.search(params[:search])

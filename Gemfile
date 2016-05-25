@@ -23,6 +23,9 @@ gem 'simple_token_authentication', '~> 1.0'
 # Activity feed for every changes in database
 gem 'public_activity'
 
+# to document API
+gem 'apipie-rails'
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

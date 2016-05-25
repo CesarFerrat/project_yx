@@ -7,10 +7,15 @@
             Show: <select class="form-control" id="category" onchange="changeCategory()">
                     <option value ="" <%='selected' if @selected_category == '' || @selected_category.nil?%>>All clothes</option>
                     <option value="jacket" <%='selected' if @selected_category == 'jacket'%>>Jackets</option>
-                    <option value="pant" <%='selected' if @selected_category == 'pant'%>>Pants</option>
-                    <option value="shoes" <%='selected' if @selected_category == 'shoes'%>>Shoes</option>
                     <option value="shirt" <%='selected' if @selected_category == 'shirt'%>>Shirts</option>
                     <option value="tshirt" <%='selected' if @selected_category == 'tshirt'%>>T-Shirts</option>
+                    <option value="pant" <%='selected' if @selected_category == 'pant'%>>Pants</option>
+                    <option value="shoes" <%='selected' if @selected_category == 'shoes'%>>Shoes</option>
+                    <option value="socks" <%='selected' if @selected_category == 'socks'%>>Socks</option>
+                    <option value="scarves" <%='selected' if @selected_category == 'scarves'%>>Scarves</option>
+                    <option value="watches" <%='selected' if @selected_category == 'watches'%>>Watches</option>
+                    <option value="jewelry" <%='selected' if @selected_category == 'jewelry'%>>Jewelry</option>
+                    <option value="handbags" <%='selected' if @selected_category == 'handbags'%>>Handbags</option>
                   </select>
         </div>
         <div class="col-xs-3"></div>

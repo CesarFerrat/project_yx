@@ -1,5 +1,26 @@
 class OutfitsController < ApplicationController
 
+  def_param_group :auth_and_client_and_outfit do
+    param :auth_token, String, desc: 'Client is logged in with auth token', required: true
+    param :client_id, String, desc: 'The client who owns the outfit', required: true
+    param :outfit_id, String, desc: 'The outfit being referenced', required: true
+  end
+
+  def_param_group :auth_and_client do
+    param :auth_token, String, desc: 'Client is logged in with auth token', required: true
+    param :client_id, String, desc: 'The client who owns the outfit', required: true
+  end
+
+
+  api :GET, '/clients/:client_id/outfits', 'Lists all outfits for a client'
+  formats ['json']
+  param_group :auth_and_client
+  example <<-EOT
+  Response:
+  {
+
+  }
+  EOT
   def index
     @client = Client.find(session[:current_client_id])
     @outfits = @client.outfits.without_deleted.search(params[:search])
@@ -67,7 +88,7 @@ class OutfitsController < ApplicationController
     @client = Client.find(session[:current_client_id])
     @outfit = Outfit.find(params[:id])
     @duplicate = @outfit.dup
-    @duplicate.outfit_picture = @outfit.outfit_picture 
+    @duplicate.outfit_picture = @outfit.outfit_picture
     @duplicate.client_id = session[:current_client_id]
     if @duplicate.save
         @duplicate.create_activity :create, owner: @client
